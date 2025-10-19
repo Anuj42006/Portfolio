@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Education from './components/Education';
-import Experience from './components/Achievements & Recognition';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Certificates from './components/Certificates';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import ThemeToggle from './components/ThemeToggle';
 import Loader from './components/Loader';
+import ThemeToggle from './components/ThemeToggle';
+
+// Lazy load components
+const About = lazy(() => import('./components/About'));
+const Education = lazy(() => import('./components/Education'));
+const Experience = lazy(() => import('./components/Achievements & Recognition'));
+const Skills = lazy(() => import('./components/Skills'));
+const Projects = lazy(() => import('./components/Projects'));
+const Certificates = lazy(() => import('./components/Certificates'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -44,14 +46,30 @@ function App() {
       <Navbar />
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
       <Hero />
-      <About />
-      <Education />
-      <Experience />
-      <Skills />
-      <Projects />
-      <Certificates />
-      <Contact />
-      <Footer />
+      <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader /></div>}>
+        <About />
+      </Suspense>
+      <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader /></div>}>
+        <Education />
+      </Suspense>
+      <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader /></div>}>
+        <Experience />
+      </Suspense>
+      <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader /></div>}>
+        <Skills />
+      </Suspense>
+      <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader /></div>}>
+        <Projects />
+      </Suspense>
+      <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader /></div>}>
+        <Certificates />
+      </Suspense>
+      <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader /></div>}>
+        <Contact />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-[100px] flex items-center justify-center"><Loader /></div>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
