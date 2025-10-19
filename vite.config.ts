@@ -10,9 +10,19 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'framer-motion'],
+          'framework': ['react', 'react-dom'],
+          'animations': ['framer-motion'],
+          'components': [
+            './src/components/About.tsx',
+            './src/components/Projects.tsx',
+            './src/components/Skills.tsx',
+            './src/components/Contact.tsx'
+          ]
         },
       },
     },
+  },
+  optimizeDeps: {
+    include: ['framer-motion']
   },
 });

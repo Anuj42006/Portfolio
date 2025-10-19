@@ -1,12 +1,13 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, LazyMotion, domAnimation } from 'framer-motion';
 
 const Loader: React.FC = () => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 via-cyan-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 z-50">
-      <motion.div
+    <LazyMotion features={domAnimation}>
+      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 via-cyan-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 z-50">
+        <motion.div
         className="flex flex-col xs:flex-row items-center gap-3 xs:gap-4 w-full max-w-xs sm:max-w-md md:max-w-lg px-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -62,6 +63,7 @@ const Loader: React.FC = () => {
         </div>
       </motion.div>
     </div>
+    </LazyMotion>
   );
 };
 
